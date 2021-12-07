@@ -9,8 +9,8 @@ class TestAutomationProfile : QuarkusTestProfile {
     override fun getConfigProfile(): String = "test-automation"
 
     override fun getConfigOverrides(): Map<String, String> = mutableMapOf(
-        "httpconduit.receiveTimeout" to "1000",
-        "httpconduit.connectionTimeout" to "1000",
+        "httpconduit.receive-timeout" to "1000",
+        "httpconduit.connection-timeout" to "1000",
         "wss4j.username" to "dummyUserName",
         "wss4j.password" to "dummyPassword"
     )

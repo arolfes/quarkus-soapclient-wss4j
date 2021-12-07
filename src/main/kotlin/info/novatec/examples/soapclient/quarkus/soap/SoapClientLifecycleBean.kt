@@ -20,9 +20,9 @@ import javax.inject.Singleton
 @Singleton
 @Startup
 class SoapClientLifecycleBean(
-    @Inject val httpConduitConfig: HttpConduitConfigProperties,
-    @Inject val wss4jconfig: WSS4JConfigProperties,
-    @Inject val usernameTokenPasswordClientCallback: UsernameTokenPasswordClientCallback
+    @Inject private val httpConduitConfig: HttpConduitConfigProperties,
+    @Inject private val wss4jconfig: WSS4JConfigProperties,
+    @Inject private val usernameTokenPasswordClientCallback: UsernameTokenPasswordClientCallback
 ) {
 
     fun onStart(@Observes ev: StartupEvent) {

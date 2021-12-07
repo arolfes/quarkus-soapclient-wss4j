@@ -11,7 +11,7 @@ import org.apache.wss4j.common.ext.WSPasswordCallback
 @Singleton
 @Startup
 class UsernameTokenPasswordClientCallback(
-    @Inject val wss4jconfig: WSS4JConfigProperties
+    @Inject private val wss4jconfig: WSS4JConfigProperties
 ) : CallbackHandler {
 
     override fun handle(callbacks: Array<out Callback>) {

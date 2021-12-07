@@ -22,10 +22,11 @@ val jvmTargetVersion = java.sourceCompatibility.toString()
 
 val assertjVersion: String by project
 val cxfSecurityVersion: String by project
+val quarkusCxfVersion: String by project
+val quarkusMockkVersion: String by project
 val quarkusPlatformGroupId: String by project
 val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
-val quarkusCxfVersion: String by project
 val saajApiVersion: String by project
 val saajImplVersion: String by project
 val wiremockVersion: String by project
@@ -46,11 +47,11 @@ dependencies {
     implementation("com.sun.xml.messaging.saaj:saaj-impl:$saajImplVersion")
     implementation("javax.xml.soap:saaj-api:$saajApiVersion")
 
-    implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
     testImplementation("org.assertj:assertj-core:$assertjVersion")
     testImplementation("com.github.tomakehurst:wiremock-jre8:$wiremockVersion")
+    testImplementation("io.quarkiverse.mockk:quarkus-junit5-mockk:$quarkusMockkVersion")
 }
 
 

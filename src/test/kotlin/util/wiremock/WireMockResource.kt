@@ -20,7 +20,7 @@ class WireMockResource : QuarkusTestResourceLifecycleManager {
         wireMockServer.start()
 
         return mutableMapOf(
-            "quarkus.cxf.client.\"greeterService\".client-endpoint-url"
+            "quarkus.cxf.client.greeterService.client-endpoint-url"
                     to "http://localhost:${wireMockServer.port()}$SERVICE_ENDPOINT"
         )
     }

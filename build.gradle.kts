@@ -39,6 +39,7 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-resteasy")
     implementation("io.quarkus:quarkus-resteasy-jackson")
+    implementation("io.quarkus:quarkus-config-yaml")
 
     implementation("io.quarkiverse.cxf:quarkus-cxf:$quarkusCxfVersion")
     implementation("org.apache.cxf:cxf-rt-ws-security:$cxfSecurityVersion")

@@ -1,0 +1,20 @@
+quarkus:
+  arc:
+    remove-unused-beans: framework
+  http:
+    port: 9081
+  cxf:
+    client:
+      greeterService:
+        service-interface: org.apache.hello_world_soap_http.Greeter
+        client-endpoint-url: http://localhost:9080/MockService
+        features: org.apache.cxf.feature.LoggingFeature
+        out-interceptors: org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor
+
+httpconduit:
+  receive-timeout: 60000
+  connection-timeout: 30000
+
+wss4j:
+  username: testUserName
+  password: testPassword

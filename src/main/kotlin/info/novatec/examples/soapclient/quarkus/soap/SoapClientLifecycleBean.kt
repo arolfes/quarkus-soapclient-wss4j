@@ -1,5 +1,7 @@
 package info.novatec.examples.soapclient.quarkus.soap
 
+import info.novatec.examples.soapclient.quarkus.config.HttpConduitConfigProperties
+import info.novatec.examples.soapclient.quarkus.config.WSS4JConfigProperties
 import io.quarkus.runtime.Startup
 import io.quarkus.runtime.StartupEvent
 import org.apache.cxf.BusFactory
@@ -18,9 +20,8 @@ import javax.inject.Singleton
 @Singleton
 @Startup
 class SoapClientLifecycleBean(
-    @ConfigProperty(name = "soapclient.receiveTimeout") val receiveTimeout: String,
-    @ConfigProperty(name = "soapclient.connectionTimeout") val connectionTimeout: String,
-    @ConfigProperty(name = "wss4j.username") val wss4jUsername: String,
+    @Inject val httpConduitConfig: HttpConduitConfigProperties,
+    @Inject val wss4jconfig: WSS4JConfigProperties,
     @Inject val usernameTokenPasswordClientCallback: UsernameTokenPasswordClientCallback
 ) {
 
@@ -32,8 +33,8 @@ class SoapClientLifecycleBean(
         val httpConduitConfigurer =
             HTTPConduitConfigurer { _, _, conduit ->
                 val clientPolicy = HTTPClientPolicy().apply {
-                    receiveTimeout = this@SoapClientLifecycleBean.receiveTimeout.toLong()
-                    connectionTimeout = this@SoapClientLifecycleBean.connectionTimeout.toLong()
+                    receiveTimeout = this@SoapClientLifecycleBean.httpConduitConfig.receiveTimeout().toLong()
+                    connectionTimeout = this@SoapClientLifecycleBean.httpConduitConfig.connectionTimeout().toLong()
                 }
                 conduit.client = clientPolicy
             }
@@ -47,7 +48,7 @@ class SoapClientLifecycleBean(
             ConfigurationConstants.ACTION to WSHandlerConstants.USERNAME_TOKEN,
             ConfigurationConstants.PASSWORD_TYPE to WSConstants.PW_TEXT,
             ConfigurationConstants.PW_CALLBACK_REF to usernameTokenPasswordClientCallback,
-            ConfigurationConstants.USER to wss4jUsername
+            ConfigurationConstants.USER to wss4jconfig.username()
         )
         return WSS4JOutInterceptor(outProps)
     }
